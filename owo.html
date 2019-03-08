@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>THE FAST</title>
+    <script src="jspsych-6.0.5/jspsych.js"></script>
+    <script src="jspsych-6.0.5/plugins/jspsych-html-keyboard-response.js"></script>
+    <script src="jspsych-6.0.5/plugins/jspsych-image-keyboard-response.js"></script>
+    <script src="jspsych-6.0.5/plugins/jspsych-instructions.js"></script>
+    <link href="jspsych-6.0.5/css/jspsych.css" rel="stylesheet" type="text/css"></link>
+     <link href="main.css" rel="stylesheet" type="text/css"></link>
+  </head>
+  <body></body>
+  <script>
+      var timeline = [];
+      var instruct = {
+        type: 'instructions',
+    pages: [
+        'Zapraszamy  do eksperymentu, proszę poruszać się lewym przyciskiem strzałki(🡐) oraz prawym przyciskiem strzałki(🡒) w celu przejścia dalej',
+        'Zostaną Panu/Pani zaprezentowane polskie słowa, slajd po slajdzie. Będą one miały usunięty jeden znak.',
+        'W eksperymencie również należy poruszać się strzałkami. Powodzenia. Na tobie spoczywa los ludzi i potworów.'
+    ],
+    show_clickable_nav: true,
+    button_label_previous: 'Poprzednia',
+    button_label_next: 'Następna'
+};
+    var test_stimuli = [
+      { stimulus:  "<p id='main'>AUTOB<span> </span>S</p>"+"<div id='left'>U</div> "+ "<div id='right'>E</div> ", data: {test_part: 'test', correct_response: 'leftArrow'}},
+      { stimulus:  "<p id='main'>B<span> </span>TON</p>"+"<div id='left'>U</div> "+ "<div id='right'>A</div> ", data: {test_part: 'test', correct_response: 'rightArrow'}},
+      { stimulus:  "<p id='main'>POM<span> </span>DOR</p>"+"<div id='left'>O</div> "+ "<div id='right'>I</div> ", data: {test_part: 'test', correct_response: 'rightArrow'}},
+      { stimulus:  "<p id='main'>K<span> </span>KTUS</p>"+"<div id='left'>A</div> "+"<div id='right'>E</div> ", data: {test_part: 'test', correct_response: 'leftArrow'}},
+      { stimulus:  "<p id='main'>KOR<span> </span>K</p>"+"<div id='left'>U</div> "+ "<div id='right'>E</div> ", data: {test_part: 'test', correct_response: 'rightArrow'}},
+      { stimulus:  "<p id='main'>B<span> </span>CZKA</p>"+"<div id='left'>A</div> "+ "<div id='right'>E</div> ", data: {test_part: 'test', correct_response: 'rightArrow'}},
+      { stimulus:  "<p id='main'>P<span> </span>JAC</p>"+"<div id='left'>A</div> "+ "<div id='right'>U</div> ", data: {test_part: 'test', correct_response: 'leftArrow'}},
+      { stimulus:  "<p id='main'>NOT<span> </span>S</p>"+"<div id='left'>U</div> "+ "<div id='right'>E</div> ", data: {test_part: 'test', correct_response: 'rightArrow'}},
+      { stimulus:  "<p id='main'>P<span> </span> TON</p>"+"<div id='left'>U</div> "+ "<div id='right'>Y</div> ", data: {test_part: 'test', correct_response: 'rightArrow'}},
+      { stimulus:  "<p id='main'>M<span> </span>SZKA</p>"+"<div id='left'>Y</div> "+ "<div id='right'>I</div> ", data: {test_part: 'test', correct_response: 'leftArrow'}},
+      { stimulus:  "<p id='main'>KART<span> </span>N</p>"+"<div id='left'>U</div> "+ "<div id='right'>O</div> ", data: {test_part: 'test', correct_response: 'rightArrow'}},
+      { stimulus:  "<p id='main'>P<span> </span>PIER</p>"+"<div id='left'>U</div> "+ "<div id='right'>A</div> ", data: {test_part: 'test', correct_response: 'rightArrow'}},
+      { stimulus:  "<p id='main'>K<span> </span>SMOS</p>"+"<div id='left'>O</div> "+ "<div id='right'>E</div> ", data: {test_part: 'test', correct_response: 'leftArrow'}},
+      { stimulus:  "<p id='main'>K<span> </span>SZA</p>"+"<div id='left'>U</div> "+ "<div id='right'>E</div> ", data: {test_part: 'test', correct_response: 'leftArrow'}},
+      { stimulus:  "<p id='main'>K<span> </span>KOS</p>"+"<div id='left'>O</div> "+ "<div id='right'>E</div> ", data: {test_part: 'test', correct_response: 'leftArrow'}},
+      { stimulus:  "<p id='main'>B<span> </span>TELKA</p>"+"<div id='left'>U</div> "+ "<div id='right'>E</div> ", data: {test_part: 'test', correct_response: 'leftArrow'}},
+      { stimulus:  "<p id='main'>L<span> </span>MPA</p>"+"<div id='left'>A</div> "+ "<div id='right'>E</div> ", data: {test_part: 'test', correct_response: 'leftArrow'}},
+      { stimulus:  "<p id='main'>KUB<span> </span>K</p>"+"<div id='left'>U</div> "+ "<div id='right'>E</div> ", data: {test_part: 'test', correct_response: 'rightArrow'}},
+      { stimulus:  "<p id='main'>DR<span> </span>KARKA</p>"+"<div id='left'>U</div> "+ "<div id='right'>E</div> ", data: {test_part: 'test', correct_response: 'leftArrow'}},
+      { stimulus:  "<p id='main'>L<span> </span>PTOP</p>"+"<div id='left'>E</div> "+ "<div id='right'>A</div> ", data: {test_part: 'test', correct_response: 'rightArrow'}},
+    ];
+    var test = {
+      type: "html-keyboard-response",
+      stimulus: jsPsych.timelineVariable('stimulus'),
+      choices: ['leftArrow', 'rightArrow'],
+      data: jsPsych.timelineVariable('data')
+    }
+    
+    var test_procedure = {
+      timeline: [test],
+      timeline_variables: test_stimuli,
+      randomize_order: true,
+          
+    }
+    var end = {
+      type: "html-keyboard-response",
+      stimulus: function() {
+
+        var trials = jsPsych.data.get().filter({test_part: 'test'});
+        var correct_trials = trials.filter({correct_response: true});
+        var accuracy = Math.round(correct_trials.count() / trials.count() * 100);
+        var rt = Math.round(correct_trials.select('rt').mean());
+
+        return "<p>You responded correctly on "+accuracy+"% of the trials.</p>"+
+        "<p>Your average response time was "+rt+"ms.</p>"+
+        "<p>Press any key to complete the experiment. Thank you!</p>";
+
+      }
+    };
+
+/* TIMELINES */
+timeline.push(instruct)
+timeline.push(test_procedure)
+timeline.push(end)
+/* SAVE DATA */
+function saveData(name, data) {
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', 'filesave.php');
+  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.send(JSON.stringify({filename: name, filedata: data}));
+}
+jsPsych.init({
+      timeline: timeline,
+      on_finish: function() {
+    jsPsych.data.displayData();
+    saveData("data", jsPsych.data.get().csv());
+    }
+  });
+  </script>
+  </html>
